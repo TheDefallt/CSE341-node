@@ -1,11 +1,12 @@
 const fs = require('fs');
+let userList = '';
 
 const requestHandler = (req, res) => {
     const url = req.url;
     const method = req.method;
+    
 
     if (url === '/') {
-        //Add a greeting message
         res.write('<html>');
         res.write('<head><title>Prove 01</title></head>');
         res.write('<body>');
@@ -17,11 +18,21 @@ const requestHandler = (req, res) => {
         return res.end();
     }
 
-    if (url === '/create-user' && method === 'POST') {
-        //Parse form data and display in the console.
+    if (url === '/create-user') {
+        const body = [];
+        req.on('data', (chunk) => {
+            body.push(chunk);
+        });
+        req.on('end', () => {
+            const parsedBody = Buffer.concat(body).toString();
+            const message = parsedBody.split('=')[1];
+            userList += `<li>${message}</li>`;
+            console.log(message);
+            return res.end();
+        });
     }
 
-    if (url === '/users' && method === 'POST') {
+    if (url === '/users') {
         res.write('<html>');
         res.write('<head><title>Prove 01</title></head>');
         res.write('<body>');
@@ -31,10 +42,12 @@ const requestHandler = (req, res) => {
         res.write('<li>BBanner</li>');
         res.write('<li>PParker</li>');
         res.write('<li>NFury</li>');
+        res.write(userList);
         res.write('</ul>');
         res.write('</body>');
         res.write('</html>');
         return res.end();
-        //Update list of users on the user's page.
     }
 }
+
+module.exports = requestHandler;
