@@ -6,17 +6,20 @@ const routes = require('./routes.js');
 
 const app = express();
 
-const adminRoutes = require('./Routes/admin.js');
+app.set('view engine', 'pug');
+app.set('views', 'Notes/Views');
+
+const adminData = require('./Routes/admin.js');
 const shopRoutes = require('./Routes/shop.js');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'Public')));
 
-app.use('/admin', adminRoutes);
+app.use('/admin', adminData.routes);
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+    res.status(404).render('404', {pageTitle: 'Page not found'});
 });
 
 app.listen(3000);
