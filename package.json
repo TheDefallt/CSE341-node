@@ -10,6 +10,7 @@
     "start": "nodemon index.js",
     "test": "node test.js",
     "prove01": "nodemon prove01.js",
+    "prove02": "nodemon week2/prove02.js",
     "notes": "nodemon Notes/app.js"
   },
   "dependencies": {
