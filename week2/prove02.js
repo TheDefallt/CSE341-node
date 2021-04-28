@@ -8,7 +8,7 @@ const app = express();
 
 //Set EJS as views engine, and week 2 views folder as view folder
 app.set('view engine', 'ejs');
-app.set('views', 'views');
+app.set('views', 'week2/views');
 
 //Set routes constants
 const inputRoutes = require('./routes/input.js');
@@ -23,7 +23,7 @@ app.use(displayRoutes);
 
 //Default 404 page not found route
 app.use((req, res, next) => {
-    res.status(404).render('404', {pageTitle: 'Page not found'});
+    res.status(404).render('404', {path: '', pageTitle: 'Page not found'});
 });
 
 //Starts app listening on port 3000 for local testing, or the designated port given by heroku
