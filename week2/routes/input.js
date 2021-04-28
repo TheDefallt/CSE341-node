@@ -12,7 +12,7 @@ Starts rendering the add-book page and passes all neccessary key pairs*/
 router.get('/add-book', (req, res, next) => {
     res.render('add-book', {
         pageTitle: 'Add Book', 
-        path: 'add-book', 
+        path: '/add-book', 
         activeAddBook: true
     });
 });
