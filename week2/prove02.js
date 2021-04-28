@@ -27,6 +27,4 @@ app.use((req, res, next) => {
 });
 
 //Starts app listening on port 3000 for local testing, or the designated port given by heroku
-app.listen(process.env.PORT || 3000);
-
-//Issues to resolve, file paths to views in view folders are not working and need adjusted. 
+app.listen(process.env.PORT || 3000); 
