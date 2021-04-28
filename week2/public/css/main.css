@@ -64,3 +64,16 @@ main {
     display: block;
     width: 100%;
 }
+
+.form-control label{
+    padding-top: 10px;
+}
+
+.form-control textarea{
+    height: 3rem;
+    width: 100%;
+}
+
+button {
+    margin-top: 10px;
+}
