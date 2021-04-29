@@ -79,6 +79,10 @@ main {
     width: 100%;
 }
 
+.form-control input{
+    border: 0.5px solid grey;
+}
+
 .form-control input,
 .form-control textarea {
     background-color: #feffff;
@@ -95,4 +99,21 @@ button {
 
 button:hover {
     background-color: #fff0a4;
+}
+
+.grid {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: 23vw 23vw 23vw 23vw;
+    column-gap: 25px;
+    row-gap: 15px;
+}
+
+.card {
+    padding: 10px;
+}
+
+.card_image img{
+    height: auto;
+    width: 100%;
 }

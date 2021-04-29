@@ -19,7 +19,8 @@ router.get('/add-book', (req, res, next) => {
 
 router.post('/add-book', (req, res, next) => {
     products.push({ 
-        title: req.body.title, 
+        title: req.body.title,
+        price: '$' + req.body.price, 
         summary:  req.body.summary
     });
     res.redirect('/');
