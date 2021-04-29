@@ -5,25 +5,25 @@
     <%- include('../includes/navigation.ejs') %>
 
     <main>
-        <% if (prods.length > 0) { %>
+        <% if (books.length > 0) { %>
             <div class="grid">  
-                <% for (let product of prods) { %>
+                <% for (let book of books) { %>
                     <article class="card product-item shadow">
                         <header class="card_header">
-                            <h1 class="product_title"><%= product.title %></h1>
+                            <h1 class="product_title"><%= book.title %></h1>
                         </header>
                         <div class="card_image">
                             <img src="https://cdn.pixabay.com/photo/2016/03/31/20/51/book-1296045_960_720.png">
                         </div>
                         <div class="card_content">
-                            <h2 class="product_price"><%= product.price %></h2>
-                            <p class="product_description"><%= product.summary %></p>
+                            <h2 class="product_price"><%= book.price %></h2>
+                            <p class="product_description"><%= book.summary %></p>
                         </div>
                     </article>
                 <% } %>
             </div>
         <% } else { %>
-            <h1>No products found</h1>
+            <h1>No books found</h1>
         <% } %>
     </main>
 <%- include('../includes/end.ejs') %>

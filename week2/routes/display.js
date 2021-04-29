@@ -10,13 +10,13 @@ const router = express.Router();
 /*Route that is trigger on an HTTP GET that ends with a leading /. 
 Starts rendering the add-book page and passes all neccessary key pairs*/
 router.get('/', (req, res, next) => {
-    const products = bookData.products;
+    const books = bookData.books;
     res.render('display-book', {
         pageTitle: 'Book List', 
-        prods: products, 
+        books: books, 
         docTitle: 'Book List', 
         path: '/', 
-        hasProducts: products.length > 0,
+        hasProducts: books.length > 0,
         activShop: true
     });
 });

@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 
 //Array for storing user inputs. Data leaves when server restarts.
-const products = [];
+const books = [];
 
 /*Route that is trigger on an HTTP GET that ends with /add-book. 
 Starts rendering the add-book page and passes all neccessary key pairs*/
@@ -18,7 +18,7 @@ router.get('/add-book', (req, res, next) => {
 });
 
 router.post('/add-book', (req, res, next) => {
-    products.push({ 
+    books.push({ 
         title: req.body.title,
         price: '$' + req.body.price, 
         summary:  req.body.summary
@@ -27,4 +27,4 @@ router.post('/add-book', (req, res, next) => {
 });
 
 exports.routes = router;
-exports.products = products;
+exports.books = books;
