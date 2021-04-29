@@ -16,6 +16,35 @@
   
 </div>
 
+<main>
+  <form class="user-form" action="/ta02/addUser" method="POST">
+      <div class="form-control">
+          <label for="username">Username</label>
+              <input type="text" name="username" id="username">
+      </div>
+      <button type="submit">Add user</button>
+  </form>
+
+  <form class="user-form" action="/ta02/removeuser" method="POST">
+    <div class="form-control">
+        <label for="userremove">Username</label>
+            <input type="text" name="userremove" id="userremove">
+    </div>
+    <button type="submit">Remove user</button>
+</form>
+
+  <section>
+    <% if (users.length > 0) { %>
+      <div class="grid">  
+          <% for (let user of users) { %>
+              <p><%= user %></p>
+          <% } %>
+      </div>
+  <% } else { %>
+      <h1>No users found</h1>
+  <% } %>
+  </section>
+</main>
 
 </body>
 </html>
