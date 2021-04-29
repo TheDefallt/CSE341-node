@@ -1,1 +1,1 @@
-web: npm run prove02.js
+web: npm run prove02
