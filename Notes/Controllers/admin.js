@@ -10,21 +10,23 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-    const product = new Product(req.body.title);
+    const title = req.body.title;
+    const imageUrl = req.body.imageUrl;
+    const price = req.body.price;
+    const description = req.body.description;
+
+    const product = new Product(title, imageUrl, description, price);
     product.save();
     res.redirect('/');
 };
 
 exports.getProducts = (req, res, next) => {
     Product.fetchAll((products) => {
-        res.render('Shop/product-list', {
-            pageTitle: 'Shop', 
+        res.render('admin/products', {
+            pageTitle: 'Admin Products', 
             prods: products, 
             docTitle: 'Shop', 
-            path: '/', 
-            hasProducts: products.length > 0,
-            activShop: true,
-            productCSS: true
+            path: '/admin/products'
         });
     });
-};
+}
