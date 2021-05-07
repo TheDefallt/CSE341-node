@@ -1,5 +1,6 @@
 //A copy of the product model to call functions
 const Product = require('../models/airplane');
+const Cart = require('../models/cart');
 
 //
 exports.getProducts = (req, res, next) => {
@@ -48,7 +49,10 @@ exports.postCart = (req, res, next) => {
     Product.findById(prodId, (product) => {
         Cart.addProduct(prodId, product.price);
     });
-    res.render('/cart');
+    res.render('shop/cart', {
+        pageTitle: 'Your Cart',
+        path: '/cart'
+    });
 }
 
 exports.getOrders = (req, res, next) => {
