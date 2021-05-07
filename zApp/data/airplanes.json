@@ -1,0 +1,20 @@
+[
+    {
+        "make":"Cessna",
+        "model":"172 Skyhawk",
+        "year":"2014",
+        "imageUrl":"https://disciplesofflight.com/wp-content/uploads/2015/01/Cessna-172n.jpg",
+        "category":"General Aviation",
+        "description":"A lengendary plane that many have flown.",
+        "price":"289,000"
+    },
+    {
+        "make":"Cessna",
+        "model":"404 Titan",
+        "year":"1979",
+        "imageUrl":"https://aircharterservice-globalcontent-live.cphostaccess.com/images/aircraft-guide-images/private/cessna2040420ex20pic_tcm36-3810.jpg",
+        "category":"Small Passenger",
+        "description":"Great for cross country flying with friends",
+        "price":"193,000"
+    }
+]

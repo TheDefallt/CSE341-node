@@ -11,6 +11,7 @@
     "test": "node test.js",
     "prove01": "nodemon prove01.js",
     "prove02": "nodemon week2/prove02.js",
+    "zApp": "nodemon zApp/app.js",
     "notes": "nodemon Notes/app.js"
   },
   "dependencies": {

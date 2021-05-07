@@ -10,7 +10,7 @@
                 <% for (let product of prods) { %>
                     <article class="card product-item">
                         <header class="card_header">
-                            <h1 class="product_title"><%= product.title %></h1>
+                            <h1 class="product_title"><%= `${product.make} ${product.model}` %></h1>
                         </header>
                         <div class="card_image">
                             <img src="<%= product.imageUrl %>"
@@ -18,10 +18,9 @@
                         </div>
                         <div class="card_content">
                             <h2 class="product_price">$<%= product.price %></h2>
+                            <h3 class="product_price"><%= `Year: ${product.year}` %></h3>
+                            <h3 class="product_price"><%= `Category: ${product.category}` %></h3>
                             <p class="product_description"><%= product.description %></p>
-                        </div>
-                        <div class="card_actions">
-                            <%- include('../includes/add-to-cart.ejs', {product: product}) %>
                         </div>
                     </article>
                 <% } %>
