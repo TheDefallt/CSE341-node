@@ -9,7 +9,7 @@ exports.getAddProduct = (req, res, next) => {
     });
 };
 
-//Triggered when adding a plane to the JSON file. Pulls data from the add page and calls product.save to write it
+//Triggered when adding a plane to the JSON file. Pulls data from the add-page and calls product.save to write it
 exports.postAddProduct = (req, res, next) => {
     const make = req.body.make;
     const model = req.body.model;
@@ -22,6 +22,13 @@ exports.postAddProduct = (req, res, next) => {
     const product = new Product(make, model, year, imageUrl, category, description, price);
     product.save();
     res.redirect('/');
+};
+
+exports.postDeleteProduct = (req, res, next) => {
+    const prodId = req.body.productId;
+    console.log(prodId);
+    Product.deleteById(prodId);
+    res.redirect('/admin/products');
 };
 
 exports.getProducts = (req, res, next) => {
