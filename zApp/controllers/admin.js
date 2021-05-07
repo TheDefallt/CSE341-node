@@ -9,13 +9,17 @@ exports.getAddProduct = (req, res, next) => {
     });
 };
 
+//Triggered when adding a plane to the JSON file. Pulls data from the add page and calls product.save to write it
 exports.postAddProduct = (req, res, next) => {
-    const title = req.body.title;
+    const make = req.body.make;
+    const model = req.body.model;
+    const year = req.body.year;
     const imageUrl = req.body.imageUrl;
-    const price = req.body.price;
+    const category = req.body.category;
     const description = req.body.description;
+    const price = req.body.price;
 
-    const product = new Product(title, imageUrl, description, price);
+    const product = new Product(make, model, year, imageUrl, category, description, price);
     product.save();
     res.redirect('/');
 };
