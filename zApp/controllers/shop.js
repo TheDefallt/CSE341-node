@@ -37,13 +37,17 @@ exports.getIndex = (req, res, next) => {
     });
 }
 
+
+//The issue is here, everything is null for some reason.
 exports.getCart = (req, res, next) => {
     Cart.getProducts(cart => {
         Product.fetchAll(products => {
             const cartProducts = [];
             for(product of products){
+                console.log(products);
                 const cartProductData = cart.products.find(prod => prod.id === product.id);
                 if(cartProductData){
+                    
                     cartProducts.push({ productData: product, qty: cartProductData.qty });
                 }
             }
