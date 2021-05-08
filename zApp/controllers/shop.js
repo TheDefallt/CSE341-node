@@ -63,10 +63,7 @@ exports.postCart = (req, res, next) => {
     Product.findById(prodId, (product) => {
         Cart.addProduct(prodId, product.price);
     });
-    res.render('shop/cart', {
-        pageTitle: 'Your Cart',
-        path: '/cart'
-    });
+    res.redirect('/cart');
 }
 
 exports.postCartDeleteProduct = (req, res, next) => {
