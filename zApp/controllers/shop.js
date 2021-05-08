@@ -40,14 +40,12 @@ exports.getIndex = (req, res, next) => {
 
 //The issue is here, everything is null for some reason.
 exports.getCart = (req, res, next) => {
-    Cart.getProducts(cart => {
+    Cart.getCart(cart => {
         Product.fetchAll(products => {
             const cartProducts = [];
             for(product of products){
-                console.log(products);
                 const cartProductData = cart.products.find(prod => prod.id === product.id);
                 if(cartProductData){
-                    
                     cartProducts.push({ productData: product, qty: cartProductData.qty });
                 }
             }
@@ -68,6 +66,14 @@ exports.postCart = (req, res, next) => {
     res.render('shop/cart', {
         pageTitle: 'Your Cart',
         path: '/cart'
+    });
+}
+
+exports.postCartDeleteProduct = (req, res, next) => {
+    const prodId = req.body.productId;
+    Product.findById(prodId, product => {
+        Cart.deleteProduct(prodId, product.price);
+        res.redirect('/cart');
     });
 }
 
