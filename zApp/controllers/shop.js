@@ -19,7 +19,7 @@ exports.getProduct = (req, res, netxt) => {
     Product.findById(prodId, product => {
         res.render('shop/product-detail', {
             product: product, 
-            pageTitle: product.title,
+            pageTitle: `${product.make} ${product.model}`,
             path: '/products'
         });
     });
