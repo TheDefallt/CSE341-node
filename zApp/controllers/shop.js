@@ -28,6 +28,7 @@ exports.getProduct = (req, res, netxt) => {
 
 exports.getIndex = (req, res, next) => {
     Product.fetchAll((products) => {
+        //Extra filtering code
         let filteredProduct = [];
         criteria = req.body.filterCriteria;
         console.log(criteria);
@@ -37,7 +38,7 @@ exports.getIndex = (req, res, next) => {
                 categories.push(product.category);
             }
         }
-
+        //Extra filtering code
         if(criteria === 'None' || !criteria){
             filteredProduct = products;
         } else {
