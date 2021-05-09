@@ -6,29 +6,31 @@
 
     <main>
 
-        <a href="/admin/add-product">Add Product</a>
+        <a class="link-button" href="/admin/add-product">Add Product</a>
 
         <% if (prods.length > 0) { %>
-            <div class="grid">  
+            <div class="admin-flex">  
                 <% for (let product of prods) { %>
-                    <article class="card product-item">
-                        <header class="card_header">
-                            <h1 class="product_title"><%= product.title %></h1>
-                        </header>
-                        <div class="card_image">
-                            <img src="<%= product.imageUrl %>"
-                                alt="<%= product.title %>">
+                    <article class="card product-item flex-card">
+                        <div class="admin-left">
+                            <header class="product_title">
+                                <h1><%= `${product.make} ${product.model}` %></h1>
+                            </header>
+                            <div class="card_image card_image_admin">
+                                <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+                            </div>
                         </div>
-                        <div class="card_content">
-                            <h2 class="product_price">$<%= product.price %></h2>
-                            <p class="product_description"><%= product.description %></p>
-                        </div>
-                        <div class="card_actions">
-                            <a href="/admin/edit-product/<%= product.id %>?edit=true" class="btn">Edit</a>
-                            <form action="/admin/delete-product" method="POST">
-                                <input type="hidden" value="<%= product.id %>" name="productId">
-                                <button class="btn" type="submit">Delete</button>
-                            </form>
+                        <div class="card_content_admin">
+                            <h3 class="product_price"><%= `Price: $${product.price}` %></h3>
+                            <h3 class="year"><%= `Year: ${product.year}` %></h3>
+                            <p class="product_description"><%= `Description: ${product.description}` %></p>
+                            <div class="card_actions">
+                                <a class="link-button float-right" href="/admin/edit-product/<%= product.id %>?edit=true" class="btn">Edit</a>
+                                <form action="/admin/delete-product" method="POST">
+                                    <input type="hidden" value="<%= product.id %>" name="productId">
+                                    <button class="btn" type="submit">Delete</button>
+                                </form>
+                            </div>
                         </div>
                     </article>
                 <% } %>

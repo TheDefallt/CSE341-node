@@ -65,3 +65,94 @@ main {
     height: auto;
     width: 100%;
 }
+
+.product-form {
+    width: 20rem;
+    max-width: 90%;
+    margin: auto;
+}
+
+.form-control {
+    margin: 1rem 0;
+}
+
+.form-control label,
+.form-control input,
+.form-control textarea{
+    display: block;
+    width: 100%;
+    margin-bottom: 0.25rem;
+}
+
+.form-control input,
+.form-control textarea {
+    border: 1px solid  rgb(224, 186, 79);
+    font: inherit;
+    border-radius: 2px;
+}
+
+button, .link-button{
+    font: inherit;
+    border: 1px solid rgb(189, 119, 247);
+    color: rgb(189, 119, 247);
+    background: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover,
+button:active,
+.link-button:hover {
+    background-color: rgb(189, 119, 247);
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    padding: 1px 6px;
+}
+
+.detail-img {
+    width: 80vw;
+    height: auto;
+}
+
+.btn{
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.cart-btn {
+    display: block;
+}
+
+.admin-flex{
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+}
+
+.admin-left img{
+    width: 30vw;
+    height: auto;
+}
+
+.card_content_admin {
+    margin: 0 15px;
+    width: 25vw;
+}
+
+.card_image_admin {
+    display: block;
+}
+
+.product_title {
+    display: block;
+}
+
+.flex-card {
+    display: flex;
+}
