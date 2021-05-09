@@ -6,8 +6,16 @@
 
     <main>
 
-        <!--Add filter form-->
-
+        <form action="/" method="POST">
+            <label for="filterCriteria">Filter by Category:</label>
+            <select id="filterCriteria" name="filterCriteria">
+                <option value="None"> None </option>
+                <% for (let category of categories) { %>
+                    <option value="<%= category %>"> <%= category %> </option>
+                <% } %>
+            </select>
+            <button type="submit">Filter</button>
+        </form>
         <% if (prods.length > 0) { %>
             <div class="grid">  
                 <% for (let product of prods) { %>

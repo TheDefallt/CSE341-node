@@ -28,11 +28,28 @@ exports.getProduct = (req, res, netxt) => {
 
 exports.getIndex = (req, res, next) => {
     Product.fetchAll((products) => {
+        let filteredProduct = [];
+        criteria = req.body.filterCriteria;
+        console.log(criteria);
+        const categories = [];
+        for (product of products) {
+            if (!categories.includes(product.category)){
+                categories.push(product.category);
+            }
+        }
+
+        if(criteria === 'None' || !criteria){
+            filteredProduct = products;
+        } else {
+            filteredProduct = products.filter(product => product.category === criteria); 
+        }
+        
         res.render('shop/index', {
             pageTitle: 'Shop', 
-            prods: products, 
+            prods: filteredProduct, 
             docTitle: 'Shop', 
-            path: '/'
+            path: '/',
+            categories: categories
         });
     });
 }
