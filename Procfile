@@ -1,1 +1,1 @@
-web: npm run prove02
+web: npm run zApp
