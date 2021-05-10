@@ -1,4 +1,4 @@
-const Product = require('../Models/product');
+const Product = require('../Models/product_old');
 
 exports.getAddProduct = (req, res, next) => {
     res.render('Admin/add-product', {

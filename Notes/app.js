@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const errorController = require('./Controllers/error');
 const routes = require('./routes.js');
 const expressHbs = require('express-handlebars');
-const mongoConnect = require('./Util/Database');
+const mongoConnect = require('./Util/Database').mongoConnect;
 
 const app = express();
 
@@ -23,7 +23,6 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-mongoConnect((client) => {
-    console.log(client);
+mongoConnect(() => {
     app.listen(3000);
 });
