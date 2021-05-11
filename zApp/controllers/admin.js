@@ -1,4 +1,7 @@
+const mongodb = require('mongodb');
 const Product = require('../models/airplane');
+
+const ObjectId = mongodb.ObjectId;
 
 exports.getAddProduct = (req, res, next) => {
     res.render('admin/edit-product', {
@@ -8,7 +11,7 @@ exports.getAddProduct = (req, res, next) => {
     });
 };
 
-//Triggered when adding a plane to the JSON file. Pulls data from the add-page and calls product.save to write it
+//Triggered when adding a plane to MongoDb. Pulls data from the add-page and calls product.save to write it
 exports.postAddProduct = (req, res, next) => {
     const make = req.body.make;
     const model = req.body.model;
@@ -19,8 +22,14 @@ exports.postAddProduct = (req, res, next) => {
     const price = req.body.price;
 
     const product = new Product(null, make, model, year, imageUrl, category, description, price);
-    product.save();
-    res.redirect('/');
+    product.save()
+    .then(result => {
+        console.log('Created Product');
+        res.redirect('/admin/products');
+    })
+    .catch(err => {
+        console.log(err);
+    });
 };
 
 exports.getEditProduct = (req, res, next) => {
@@ -66,12 +75,14 @@ exports.postDeleteProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-    Product.fetchAll((products) => {
+    Product.fetchAll()
+    .then(products => {
         res.render('admin/products', {
             pageTitle: 'Admin Products', 
             prods: products, 
             docTitle: 'Shop', 
             path: '/admin/products'
         });
-    });
+    })
+    .catch(err => console.log(err));
 }

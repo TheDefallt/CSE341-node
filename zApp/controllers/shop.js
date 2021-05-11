@@ -26,12 +26,40 @@ exports.getProduct = (req, res, netxt) => {
     
 }
 
+// exports.getIndex = (req, res, next) => {
+//     Product.fetchAll((products) => {
+//         //Extra filtering code
+//         let filteredProduct = [];
+//         criteria = req.body.filterCriteria;
+//         const categories = [];
+//         for (product of products) {
+//             if (!categories.includes(product.category)){
+//                 categories.push(product.category);
+//             }
+//         }
+//         //Extra filtering code
+//         if(criteria === 'None' || !criteria){
+//             filteredProduct = products;
+//         } else {
+//             filteredProduct = products.filter(product => product.category === criteria); 
+//         }
+        
+//         res.render('shop/index', {
+//             pageTitle: 'Shop', 
+//             prods: filteredProduct, 
+//             docTitle: 'Shop', 
+//             path: '/',
+//             categories: categories
+//         });
+//     });
+// }
+
 exports.getIndex = (req, res, next) => {
-    Product.fetchAll((products) => {
-        //Extra filtering code
+    Product.fetchAll()
+    .then(products => {
+         //Extra filtering code
         let filteredProduct = [];
         criteria = req.body.filterCriteria;
-        console.log(criteria);
         const categories = [];
         for (product of products) {
             if (!categories.includes(product.category)){
@@ -44,14 +72,17 @@ exports.getIndex = (req, res, next) => {
         } else {
             filteredProduct = products.filter(product => product.category === criteria); 
         }
-        
-        res.render('shop/index', {
+
+        res.render('Shop/index', {
             pageTitle: 'Shop', 
-            prods: filteredProduct, 
+            prods: products, 
             docTitle: 'Shop', 
             path: '/',
             categories: categories
         });
+    })
+    .catch(err => {
+        console.log(err);
     });
 }
 
