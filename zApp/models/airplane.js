@@ -8,7 +8,7 @@ class Product {
 
     //Constructor that builds a new plane
     constructor(id, make, model, year, imageUrl, category, description, price) {
-        this._id = id;
+        this._id = id ? new mongodb.ObjectId(id) : null;
         this.make = make;
         this.model = model;
         this.year = year;
@@ -25,7 +25,7 @@ class Product {
         if(this._id){
             dbOp = db
             .collection('airplanes')
-            .updateOne({_id: new mongodb.ObjectId(this._id)}, {$set: this});
+            .updateOne({_id: this._id}, {$set: this});
         } else {
             dbOp = db.collection('airplanes').insertOne(this);
         }
@@ -68,64 +68,18 @@ class Product {
         });
     }
 
-    //Gets all planes from the JSON file. Returns empty if there is an error.
-// const getProductsFromFile = cb => {
-//     fs.readFile(p, (err, fileContent) => {
-//         if (err) {
-//             cb([]);
-//         } else {
-//             cb(JSON.parse(fileContent));
-//         }
-//     });
-// }
-    
-    // save() {
-    //     getProductsFromFile(products => {
-    //         if (this.id) {
-    //             const existingProductIndex = products.findIndex(prod => prod.id === this.id);
-    //             const updatedProducts = [...products];
-    //             updatedProducts[existingProductIndex] = this;
-                
-    //             fs.writeFile(p, JSON.stringify(updatedProducts), err => {
-    //                 console.log(err);
-    //             });
-    //         } else {
-    //             this.id = Math.random().toString();
-    //             products.push(this);
-    //             fs.writeFile(p, JSON.stringify(products), err => {
-    //                 console.log(err);
-    //             });
-    //         }
-    //     });
-    // }
-
-
-    // static deleteById(id) {
-
-    //     console.log(id);
-    //     getProductsFromFile(products => {
-    //         const product = products.find(prod => prod.id === id);
-    //         const updatedProducts = products.filter(p => p.id !== id);
-    //         fs.writeFile(p, JSON.stringify(updatedProducts), err => {
-    //             if(!err){
-    //                 Cart.deleteProduct(id, product.price);
-    //             }
-    //         });
-    //     });
-    // }
-
-    // //Gets all planes contained in the airplanes.JSON file
-    // static fetchAll(cb) {
-    //     getProductsFromFile(cb);
-    // }
-
-    // //Gets a specific plane from the airplanes.JSON file
-    // static findById(id, cb){
-    //     getProductsFromFile(products => {
-    //         const product = products.find(p => p.id === id);
-    //         cb(product);
-    //     });
-    // }
+    static deleteById(prodId) {
+        const db = getDb();
+        return db
+        .collection('airplanes')
+        .deleteOne({_id: new mongodb.ObjectId(prodId)})
+        .then(result => {
+            console.log('Deleted');
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
 }
 
 module.exports = Product;

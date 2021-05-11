@@ -1,7 +1,4 @@
-const mongodb = require('mongodb');
 const Product = require('../models/airplane');
-
-const ObjectId = mongodb.ObjectId;
 
 exports.getAddProduct = (req, res, next) => {
     res.render('admin/edit-product', {
@@ -66,7 +63,7 @@ exports.postEditProduct = (req, res, next) => {
     const updatedDescription = req.body.description;
     const updatedPrice = req.body.price;
     const updatedProduct = new Product(
-        new ObjectId(prodId), 
+        prodId, 
         updatedMake, 
         updatedModel, 
         updatedYear, 
@@ -82,14 +79,18 @@ exports.postEditProduct = (req, res, next) => {
     .catch(err => {
         console.log(err);
     });
-    //Not sure if the above catch code will trigger errors on updates
 };
 
 exports.postDeleteProduct = (req, res, next) => {
     const prodId = req.body.productId;
-    console.log(prodId);
-    Product.deleteById(prodId);
-    res.redirect('/admin/products');
+    Product.deleteById(prodId)
+    .then(() => {
+        console.log('DELETED PRODUCT!');
+        res.redirect('/admin/products');
+    })
+    .catch(err => {
+        console.log(err);
+    });
 };
 
 exports.getProducts = (req, res, next) => {
