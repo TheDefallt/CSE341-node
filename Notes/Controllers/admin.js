@@ -30,7 +30,6 @@ exports.postAddProduct = (req, res, next) => {
 };
 
 exports.getEditProduct = (req, res, next) => {
-    console.log("Edit Attempt");
     const editMode = req.query.edit;
     if (!editMode) {
         return res.redirect('/');

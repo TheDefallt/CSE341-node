@@ -8,7 +8,7 @@ class Product {
 
     //Constructor that builds a new plane
     constructor(id, make, model, year, imageUrl, category, description, price) {
-        this.id = id;
+        this._id = id;
         this.make = make;
         this.model = model;
         this.year = year;
@@ -22,10 +22,10 @@ class Product {
     save() {
         const db = getDb();
         let dbOp;
-        if(this.id){
+        if(this._id){
             dbOp = db
             .collection('airplanes')
-            .updateOne({id: new mongodb.ObjectId(this.id)}, {$set: this});
+            .updateOne({_id: new mongodb.ObjectId(this._id)}, {$set: this});
         } else {
             dbOp = db.collection('airplanes').insertOne(this);
         }
@@ -54,12 +54,13 @@ class Product {
     }
 
     static findById(prodId){
+        
         const db = getDb();
         return db.collection('airplanes')
         .find({_id: mongodb.ObjectId(prodId)})
         .next()
         .then(product => {
-            console.log(product);
+            //console.log(product);
             return product;
         })
         .catch(err => {
