@@ -41,7 +41,6 @@ exports.getEditProduct = (req, res, next) => {
     Product.findById(prodId)
     .then(product => {
         if(!product){
-            console.log(product);
             return res.redirect('/');
         }
         
@@ -66,9 +65,24 @@ exports.postEditProduct = (req, res, next) => {
     const updatedCategory = req.body.category;
     const updatedDescription = req.body.description;
     const updatedPrice = req.body.price;
-    const updatedProduct = new Product(prodId, updatedMake, updatedModel, updatedYear, updatedImageUrl, updatedCategory, updatedDescription, updatedPrice)
-    updatedProduct.save();
-    res.redirect('/admin/products');
+    const updatedProduct = new Product(
+        new ObjectId(prodId), 
+        updatedMake, 
+        updatedModel, 
+        updatedYear, 
+        updatedImageUrl, 
+        updatedCategory, 
+        updatedDescription, 
+        updatedPrice);
+    updatedProduct.save()
+    .then(result => {
+        console.log('UPDATED PRODUCT!');
+        res.redirect('/admin/products');
+    })
+    .catch(err => {
+        console.log(err);
+    });
+    //Not sure if the above catch code will trigger errors on updates
 };
 
 exports.postDeleteProduct = (req, res, next) => {
