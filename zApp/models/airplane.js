@@ -1,13 +1,11 @@
 const mongodb = require('mongodb');
 const getDb = require('../util/database').getDb;
 
-const Cart = require('./cart');
-
 //Product class with all relavent data
 class Product {
 
     //Constructor that builds a new plane
-    constructor(id, make, model, year, imageUrl, category, description, price) {
+    constructor(id, make, model, year, imageUrl, category, description, price, userId) {
         this._id = id ? new mongodb.ObjectId(id) : null;
         this.make = make;
         this.model = model;
@@ -16,6 +14,7 @@ class Product {
         this.category = category;
         this.description = description;
         this.price = price;
+        this.userId = userId;
     }
     
     //Saves this version of product to the MongoDB.

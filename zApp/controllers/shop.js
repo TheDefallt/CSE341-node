@@ -1,8 +1,6 @@
 //A copy of the product model to call functions
 const Product = require('../models/airplane');
-const Cart = require('../models/cart');
 
-//
 exports.getProducts = (req, res, next) => {
     Product.fetchAll((products) => {
         res.render('shop/index', {
@@ -89,31 +87,29 @@ exports.getIndex = (req, res, next) => {
 
 //The issue is here, everything is null for some reason.
 exports.getCart = (req, res, next) => {
-    Cart.getCart(cart => {
-        Product.fetchAll(products => {
-            const cartProducts = [];
-            for(product of products){
-                const cartProductData = cart.products.find(prod => prod.id === product.id);
-                if(cartProductData){
-                    cartProducts.push({ productData: product, qty: cartProductData.qty });
-                }
-            }
-            res.render('shop/cart', {
-                path: '/cart',
-                pageTitle: 'Your Cart',
-                products: cartProducts,
-                total: cart.totalPrice
-            });
+    req.user
+    .getCart()
+    .then(products => {      
+        res.render('shop/cart', {
+            path: '/cart',
+            pageTitle: 'Your Cart',
+            products: products,
+            total: 'Total Price Placeholder'
         });
-    });
+    })
+    .catch(err => console.log(err));
 }
 
 exports.postCart = (req, res, next) => {
     const prodId = req.body.productId;
-    Product.findById(prodId, (product) => {
-        Cart.addProduct(prodId, product.price);
+    Product.findById(prodId)
+    .then(product => {
+        return req.user.addToCart(product);
+    })
+    .then(result => {
+        res.redirect('/cart');
+        console.log(result);
     });
-    res.redirect('/cart');
 }
 
 exports.postCartDeleteProduct = (req, res, next) => {
