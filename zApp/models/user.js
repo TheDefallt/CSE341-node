@@ -101,6 +101,7 @@ class User {
     }
 
     getOrders() {
+        console.log(new ObjectId(this.id));
         const db = getDb();
         return db
         .collection('orders')
