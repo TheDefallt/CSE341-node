@@ -107,8 +107,9 @@ exports.getOrders = (req, res, next) => {
     .catch(err => console.log(err));
 }
 
+//Need to work on this, I may have missed this part
 exports.postOrder = (req, res, next) => {
-    let fetcedCart;
+    let fetchedCart;
     req.user
         .addOrder()
         .then(result => {
