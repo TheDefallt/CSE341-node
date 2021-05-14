@@ -3,7 +3,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const errorController = require('./controllers/error');
-const mongoConnect = require('./util/database').mongoConnect;
+const mongoose = require('mongoose');
 const User = require('./models/user');
 
 const app = express();
@@ -31,8 +31,10 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-mongoConnect(() => {
+mongoose.connect('mongodb+srv://thedefallt:T%3Fikoacsh@byui-classes.ydypa.mongodb.net/airplaneShop?retryWrites=true&w=majority')
+.then(result => {
     app.listen(process.env.PORT || 3000);
+})
+.catch(err => {
+    console.log(err);
 });
-
-//I need to make an order button on the cart page and then create orders and display them.

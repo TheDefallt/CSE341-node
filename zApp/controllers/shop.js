@@ -2,30 +2,37 @@
 const Product = require('../models/airplane');
 
 exports.getProducts = (req, res, next) => {
-    Product.fetchAll((products) => {
+    Product.find()
+    .then(products => {
         res.render('shop/index', {
             pageTitle: 'All planes', 
             prods: products, 
             docTitle: 'Shop', 
             path: '/products'
         });
+    })
+    .catch(err => {
+        console.log(err);
     });
 };
 
 exports.getProduct = (req, res, netxt) => {
     const prodId = req.params.productId;
-    Product.findById(prodId, product => {
+    Product.findById(prodId)
+    .then(product => {
         res.render('shop/product-detail', {
             product: product, 
             pageTitle: `${product.make} ${product.model}`,
             path: '/products'
         });
+    })
+    .catch(err => {
+        console.log(err);
     });
-    
 }
 
 exports.getIndex = (req, res, next) => {
-    Product.fetchAll()
+    Product.find()
     .then(products => {
          //Extra filtering code
         let filteredProduct = [];
