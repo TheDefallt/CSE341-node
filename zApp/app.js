@@ -18,9 +18,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-    User.findById('609b208f480ba9ba3e2a869c')
+    User.findById('609dfc95e65ce53c5000ea16')
     .then(user => {
-        req.user = new User(user.name, user.email, user.cart, user._id);
+        req.user = user;
         next();
     })
     .catch(err => console.log(err));
@@ -31,8 +31,23 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-mongoose.connect('mongodb+srv://thedefallt:T%3Fikoacsh@byui-classes.ydypa.mongodb.net/airplaneShop?retryWrites=true&w=majority')
+mongoose.connect(
+    'mongodb+srv://thedefallt:Shotgunshell@byui-classes.ydypa.mongodb.net/airplaneShop?retryWrites=true&w=majority'
+)
 .then(result => {
+    User.findOne()
+    .then(user => {
+        if (!user) {
+            const user = new User({
+                name: 'Admin',
+                email: 'admin@planes.com',
+                cart: {
+                    items: []
+                }
+            });
+            user.save();
+        }
+    });
     app.listen(process.env.PORT || 3000);
 })
 .catch(err => {
