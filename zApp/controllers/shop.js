@@ -51,7 +51,7 @@ exports.getIndex = (req, res, next) => {
             filteredProduct = products.filter(product => product.category === criteria); 
         }
 
-        res.render('Shop/index', {
+        res.render('shop/index', {
             pageTitle: 'Shop', 
             prods: products, 
             docTitle: 'Shop', 
