@@ -6,11 +6,11 @@ const orderSchema = new Schema({
     products: [
         {
             productData: {type: Object, required: true},
-            quantity: {type:Number, required: true}
+            quantity: {type: Number, required: true}
         }
     ],
     user: {
-        name: {
+        email: {
             type: String,
             rquired: true
         },

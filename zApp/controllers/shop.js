@@ -8,14 +8,13 @@ exports.getProducts = (req, res, next) => {
         res.render('shop/index', {
             pageTitle: 'All planes', 
             prods: products, 
-            docTitle: 'Shop', 
             path: '/products'
         });
     })
     .catch(err => {
         console.log(err);
     });
-};
+}; //I removed docTitle from this function
 
 exports.getProduct = (req, res, netxt) => {
     const prodId = req.params.productId;
@@ -43,7 +42,7 @@ exports.getIndex = (req, res, next) => {
             if (!categories.includes(product.category)){
                 categories.push(product.category);
             }
-        }
+        } //Fix filtering code
         //Extra filtering code
         if(criteria === 'None' || !criteria){
             filteredProduct = products;
@@ -78,6 +77,7 @@ exports.getCart = (req, res, next) => {
             products: products,
             total: 'Total Price Placeholder'
         });
+        //Fix cart total
     })
     .catch(err => console.log(err));
 }
@@ -90,7 +90,6 @@ exports.postCart = (req, res, next) => {
     })
     .then(result => {
         res.redirect('/cart');
-        console.log(result);
     });
 }
 
@@ -112,7 +111,6 @@ exports.getOrders = (req, res, next) => {
             pageTitle: 'Your Orders',
             orders: orders
         });
-        console.log(orders);
     })
     .catch(err => console.log(err));
 }
