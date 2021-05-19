@@ -23,6 +23,7 @@
                         <div class="card_content_admin">
                             <h3 class="product_price"><%= `Price: $${product.price}` %></h3>
                             <h3 class="year"><%= `Year: ${product.year}` %></h3>
+                            <p class="product_category"><%= `Category: ${product.category}` %></p>
                             <p class="product_description"><%= `Description: ${product.description}` %></p>
                             <div class="card_actions">
                                 <a class="link-button float-right" href="/admin/edit-product/<%= product._id %>?edit=true" class="btn">Edit</a>

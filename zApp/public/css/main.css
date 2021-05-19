@@ -1,7 +1,17 @@
+:root {
+    --primary-dark: #183251;
+    --primary-light: #C4CBD8;
+    --primary-light-contrast: #dce6f6;
+    --text-hover: #C8C4C4;
+    --box-shadow-blue: #597F97;
+    --box-shadow-grey: #6C747C;
+}
+
 body {
     padding: 0;
     margin: 0;
     font-family: sans-serif;
+    background-color: var(--primary-light-contrast);
 }
 
 main {
@@ -15,8 +25,7 @@ ul {
 .main-header {
     width: 100%;
     height: 3.5rem;
-    background-color: rgb(224, 186, 79);
-    padding: 0 1.5rem;
+    background-color: var(--primary-dark);
 }
 
 .main-header_item-list {
@@ -33,19 +42,20 @@ ul {
 
 .main-header_item a {
     text-decoration: none;
-    color: black;
+    color: var(--box-shadow-grey);
 }
 
 .main-header_nav {
     height: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .main-header_item a:hover,
 .main-header_item a:active,
 .main-header_item a.active {
-    color: rgb(189, 119, 247);
+    color: var(--text-hover);
 }
 
 .centered {
@@ -62,7 +72,8 @@ ul {
 
 .card {
     padding: 10px;
-    box-shadow: 0 4px 8px  #c5c5c5, 0 6px 20px 0px #d4d4d4;
+    box-shadow: 0 4px 8px  var(--box-shadow-grey), 0 6px 20px 0px var(--primary-light);
+    background-color: white;
 }
 
 .card_image img{
@@ -90,15 +101,15 @@ ul {
 
 .form-control input,
 .form-control textarea {
-    border: 1px solid  rgb(224, 186, 79);
+    border: 1px solid var(--primary-dark);
     font: inherit;
     border-radius: 2px;
 }
 
 button, .link-button{
     font: inherit;
-    border: 1px solid rgb(189, 119, 247);
-    color: rgb(189, 119, 247);
+    border: 1px solid var(--primary-dark);
+    color: var(--primary-dark);
     background: white;
     border-radius: 3px;
     cursor: pointer;
@@ -107,7 +118,7 @@ button, .link-button{
 button:hover,
 button:active,
 .link-button:hover {
-    background-color: rgb(189, 119, 247);
+    background-color: var(--primary-dark);
     color: white;
 }
 
@@ -176,4 +187,8 @@ a {
 .cart-item-quantity {
     float: right;
     margin-right: 50vw;
+}
+
+.cart-list-item {
+    margin-bottom: 25px;
 }

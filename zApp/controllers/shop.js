@@ -34,25 +34,28 @@ exports.getProduct = (req, res, netxt) => {
 exports.getIndex = (req, res, next) => {
     Product.find()
     .then(products => {
-         //Extra filtering code
-        let filteredProduct = [];
-        criteria = req.body.filterCriteria;
+
+        //Gathers all available categories to be filtered from the database.
         const categories = [];
         for (product of products) {
             if (!categories.includes(product.category)){
                 categories.push(product.category);
             }
-        } //Fix filtering code
-        //Extra filtering code
+        }
+        
+        //Creates an array of products that only have the filtering criteria.
+        let filteredProduct = [];
+        criteria = req.body.filterCriteria;
         if(criteria === 'None' || !criteria){
             filteredProduct = products;
         } else {
             filteredProduct = products.filter(product => product.category === criteria); 
         }
 
+        //Renders the page
         res.render('shop/index', {
             pageTitle: 'Shop', 
-            prods: products, 
+            prods: filteredProduct, 
             path: '/',
             categories: categories
         });
@@ -69,14 +72,20 @@ exports.getCart = (req, res, next) => {
     .populate('cart.items.productId')
     .execPopulate()
     .then(user => {   
-        const products = user.cart.items;   
+        const products = user.cart.items;
+        
+        //Keeps running total of the prices of all items in the cart
+        let total = 0;
+        for (product of products) {
+            total += product.productId.price;
+        }
+
         res.render('shop/cart', {
             path: '/cart',
             pageTitle: 'Your Cart',
             products: products,
-            total: 'Total Price Placeholder'
+            total: total
         });
-        //Fix cart total
     })
     .catch(err => console.log(err));
 }
@@ -106,7 +115,7 @@ exports.getOrders = (req, res, next) => {
     Order.find({'user.userId': req.user._id})
     .then(orders => {
         res.render('shop/orders', {
-            path: '/orders',
+            path: '/order',
             pageTitle: 'Your Orders',
             orders: orders
         });

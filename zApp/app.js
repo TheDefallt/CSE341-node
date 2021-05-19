@@ -60,15 +60,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// app.use((req, res, next) => {
-//     User.findById('609dfc95e65ce53c5000ea16')
-//     .then(user => {
-//         req.user = user;
-//         next();
-//     })
-//     .catch(err => console.log(err));
-// });
-
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
@@ -83,3 +74,7 @@ mongoose
 .catch(err => {
     console.log(err);
 });
+
+//Shrink the forms on the Login and Signup pages to be more like the add product pages
+//Experiment with the light grey background on all pages.
+//Make cards and background contrast.

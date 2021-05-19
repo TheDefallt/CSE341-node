@@ -12,6 +12,7 @@
                     <p class="text-medium cart-list-item inline-item"><%= `${p.productId.make}  ${p.productId.model}` %></p>
                     <p class="cart-item-quantity inline-item">Qty: <%= p.quantity %></p>
                     <form action="/cart-delete-item" method="POST">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <input type="hidden" value="<%= p.productId._id%>" name="productId">
                         <button class="cart-btn" type="submit">Delete</button>
                     </form>
