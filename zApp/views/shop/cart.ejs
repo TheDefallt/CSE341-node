@@ -27,6 +27,7 @@
         <p><%= `Total: $${total}` %></p>
 
         <form action="/create-order" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <button class="cart-btn" type="submit">Create Order</button>
         </form>
 

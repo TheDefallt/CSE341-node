@@ -10,9 +10,6 @@ const router = express.Router();
 //Index page => GET
 router.get('/', shopController.getIndex);
 
-//Index page => POST
-router.post('/', shopController.getIndex);
-
 //Cart page => GET
 router.get('/cart', isAuth, shopController.getCart);
 

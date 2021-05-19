@@ -53,7 +53,6 @@ exports.getIndex = (req, res, next) => {
         res.render('shop/index', {
             pageTitle: 'Shop', 
             prods: products, 
-            docTitle: 'Shop', 
             path: '/',
             categories: categories
         });

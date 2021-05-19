@@ -14,6 +14,7 @@
                     <option value="<%= category %>"> <%= category %> </option>
                 <% } %>
             </select>
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <button type="submit">Filter</button>
         </form>
         <% if (prods.length > 0) { %>
