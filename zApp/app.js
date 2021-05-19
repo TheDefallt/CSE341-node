@@ -78,3 +78,4 @@ mongoose
 //Shrink the forms on the Login and Signup pages to be more like the add product pages
 //Work on seperating items on Cart and Orders pages
 //Add space between items on Admin page
+//Check if cart info is being saved in User database. Also see if name can be stored there.
