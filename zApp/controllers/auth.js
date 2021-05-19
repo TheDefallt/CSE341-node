@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
       api_key:
-        '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' //Need to setup sendgrid and change this key
+        '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'
     }
   })
 );
