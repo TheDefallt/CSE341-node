@@ -76,5 +76,5 @@ mongoose
 });
 
 //Shrink the forms on the Login and Signup pages to be more like the add product pages
-//Experiment with the light grey background on all pages.
-//Make cards and background contrast.
+//Work on seperating items on Cart and Orders pages
+//Add space between items on Admin page
