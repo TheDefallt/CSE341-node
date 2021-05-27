@@ -95,3 +95,4 @@ mongoose
 
 //Make CSS responsive - maybe switch to flexbox instead of grid
 
+//Take un-needed css out of views
