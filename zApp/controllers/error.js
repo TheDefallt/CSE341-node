@@ -5,3 +5,11 @@ exports.get404 = (req, res, next) => {
         isAuthenticated: req.session.isLoggedIn //Does this need to be here for the error page?
     });
 };
+
+exports.get500 = (req, res, next) => {
+    res.status(500).render('500', {
+        pageTitle: 'Error!',
+        path: '/500',
+        isAuthenticated: req.session.isLoggedIn
+    });
+};

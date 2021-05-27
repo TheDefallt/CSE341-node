@@ -14,7 +14,7 @@ exports.getProducts = (req, res, next) => {
     .catch(err => {
         console.log(err);
     });
-}; //I removed docTitle from this function
+};
 
 exports.getProduct = (req, res, netxt) => {
     const prodId = req.params.productId;
