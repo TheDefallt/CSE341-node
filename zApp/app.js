@@ -98,3 +98,5 @@ mongoose
 //Take un-needed css out of views
 
 //Reset password is not working because email is not working. Try to hide sendgrid ID
+
+//Clear user and product databases and recreate

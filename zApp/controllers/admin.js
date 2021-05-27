@@ -49,7 +49,7 @@ exports.postAddProduct = (req, res, next) => {
         price: price,
         userId: req.user
     });
-
+    console.log('Posting');
     product
     .save()
     .then(result => {
@@ -57,6 +57,7 @@ exports.postAddProduct = (req, res, next) => {
         res.redirect('/admin/products');
     })
     .catch(err => {
+        console.log(err);
         const error = new Error(err);
         error.httpStatusCode = 500;
         return next(error);
