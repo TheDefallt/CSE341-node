@@ -74,3 +74,9 @@ mongoose
 .catch(err => {
     console.log(err);
 });
+
+
+//Fix being able to make an order with no products - Don't show button unless there are items in the cart
+
+//Make CSS responsive - maybe switch to flexbox instead of grid
+
