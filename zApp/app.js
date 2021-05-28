@@ -92,7 +92,3 @@ mongoose
 
 
 //Make CSS responsive - maybe switch to flexbox instead of grid
-
-//Reset password is not working because email is not working. Try to hide sendgrid ID
-
-//Fix reset password functionality
