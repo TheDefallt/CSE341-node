@@ -148,31 +148,36 @@ exports.getOrders = (req, res, next) => {
 
 //Need to work on this, I may have missed this part
 exports.postOrder = (req, res, next) => {
-    req.user
-    .populate('cart.items.productId')
-    .execPopulate()
-    .then(user => {   
-        const products = user.cart.items.map(i => {
-            return {quantity: i.quantity, productData: { ...i.productId._doc } };
+    if(req.user.cart.items.length > 0){
+        req.user
+        .populate('cart.items.productId')
+        .execPopulate()
+        .then(user => {   
+            const products = user.cart.items.map(i => {
+                return {quantity: i.quantity, productData: { ...i.productId._doc } };
+            });
+            const order = new Order({
+                user: {
+                    name: req.user.name,
+                    userId: req.user
+                },
+                products: products
+            });  
+            return order.save();
+        })
+        .then(result => {
+            return req.user.clearCart();
+        })
+        .then(() => {
+            res.redirect('/order');
+        })
+        .catch(err => {
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         });
-        const order = new Order({
-            user: {
-                name: req.user.name,
-                userId: req.user
-            },
-            products: products
-        });  
-        return order.save();
-    })
-    .then(result => {
-        return req.user.clearCart();
-    })
-    .then(() => {
-        res.redirect('/order');
-    })
-    .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        return next(error);
-    });
+    } else {
+        res.redirect('/cart');
+    }
+    
 };

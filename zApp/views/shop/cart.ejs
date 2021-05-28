@@ -19,18 +19,17 @@
                 </li>
                 <% }) %>
             </ul>
+
+            <hr>
+
+            <p><%= `Total: $${total}` %></p>
+
+            <form action="/create-order" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button class="cart-btn" type="submit">Create Order</button>
+            </form>
         <% } else { %>
             <h1>No Products in Cart!</h1>
         <% } %>
-
-        <hr>
-
-        <p><%= `Total: $${total}` %></p>
-
-        <form action="/create-order" method="POST">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button class="cart-btn" type="submit">Create Order</button>
-        </form>
-
     </main>
     <%- include('../includes/end.ejs') %>

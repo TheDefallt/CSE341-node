@@ -91,14 +91,8 @@ mongoose
 });
 
 
-//Fix being able to make an order with no products - Don't show button unless there are items in the cart
-
 //Make CSS responsive - maybe switch to flexbox instead of grid
 
-//Take un-needed css out of views
-
 //Reset password is not working because email is not working. Try to hide sendgrid ID
-
-//Clear user and product databases and recreate
 
 //Fix reset password functionality
