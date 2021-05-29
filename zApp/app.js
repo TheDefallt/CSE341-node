@@ -89,6 +89,3 @@ mongoose
 .catch(err => {
     console.log(err);
 });
-
-
-//Make CSS responsive - maybe switch to flexbox instead of grid
