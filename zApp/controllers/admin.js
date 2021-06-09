@@ -22,6 +22,26 @@ exports.postAddProduct = (req, res, next) => {
     const category = req.body.category;
     const description = req.body.description;
     const price = req.body.price;
+    if (!image) {
+        return res.status(422).render('admin/edit-product', {
+          pageTitle: 'Add Product',
+          path: '/admin/add-product',
+          editing: false,
+          hasError: true,
+          product: {
+            make: make, 
+            model: model,
+            year: year,
+            imageUrl: imageUrl,
+            category: category,
+            description: description,
+            price: price,
+            userId: req.user
+          },
+          errorMessage: 'Attached file is not an image.',
+          validationErrors: []
+        });
+    }
     const errors = validationResult(req);
     
     if (!errors.isEmpty()) {
@@ -45,6 +65,8 @@ exports.postAddProduct = (req, res, next) => {
         });
     }
     
+    const imageUrl = image.path;
+
     const product = new Product({
         make: make, 
         model: model,
@@ -170,16 +192,21 @@ exports.getProducts = (req, res, next) => {
     });
 }
 
-exports.postDeleteProduct = (req, res, next) => {
+exports.deleteProduct = (req, res, next) => {
     const prodId = req.body.productId;
-    Product.deleteOne({ _id: prodId, userId: req.user._id })
-    .then(() => {
-        console.log('DELETED PRODUCT!');
-        res.redirect('/admin/products');
-    })
-    .catch(err => {
-        const error = new Error(err);
-        error.httpStatusCode = 500;
-        return next(error);
+    Product.findById(prodId)
+    .then(product => {
+        if (!product) {
+          return next(new Error('Product not found.'));
+        }
+        fileHelper.deleteFile(product.imageUrl);
+        return Product.deleteOne({ _id: prodId, userId: req.user._id });
+      })
+      .then(() => {
+        console.log('DESTROYED PRODUCT');
+        res.status(200).json({ message: 'Success!' });
+      })
+      .catch(err => {
+        res.status(500).json({ message: 'Deleting product failed.' });
     });
 };
