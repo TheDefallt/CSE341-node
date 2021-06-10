@@ -25,7 +25,7 @@
                             <h1 class="product_title"><%= `${product.make} ${product.model}` %></h1>
                         </header>
                         <div class="card_image">
-                            <img src="<%= product.imageUrl %>"
+                            <img src="/<%= product.imageUrl %>"
                                 alt="<%= product.title %>">
                         </div>
                         <div class="card_content">
@@ -39,6 +39,10 @@
             </div>
         <% } else { %>
             <h1>No products found</h1>
+        <% } %>
+        <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>
+        <% } else { %>
+            <h1>No Products Found!</h1>
         <% } %>
     </main>
 <%- include('../includes/end.ejs') %>

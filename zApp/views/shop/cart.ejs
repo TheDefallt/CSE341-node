@@ -24,10 +24,11 @@
 
             <p><%= `Total: $${total}` %></p>
 
-            <form action="/create-order" method="POST">
+            <!-- <form action="/create-order" method="POST">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button class="cart-btn" type="submit">Create Order</button>
-            </form>
+            </form> -->
+            <a class="btn" href="/checkout">Order Now!</a>
         <% } else { %>
             <h1>No Products in Cart!</h1>
         <% } %>
