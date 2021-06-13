@@ -18,7 +18,7 @@ exports.postAddProduct = (req, res, next) => {
     const make = req.body.make;
     const model = req.body.model;
     const year = req.body.year;
-    const imageUrl = req.body.imageUrl;
+    const image = req.file;
     const category = req.body.category;
     const description = req.body.description;
     const price = req.body.price;
@@ -32,7 +32,6 @@ exports.postAddProduct = (req, res, next) => {
             make: make, 
             model: model,
             year: year,
-            imageUrl: imageUrl,
             category: category,
             description: description,
             price: price,
@@ -54,7 +53,6 @@ exports.postAddProduct = (req, res, next) => {
                 make: make, 
                 model: model,
                 year: year,
-                imageUrl: imageUrl,
                 category: category,
                 description: description,
                 price: price,
@@ -65,7 +63,7 @@ exports.postAddProduct = (req, res, next) => {
         });
     }
     
-    //const imageUrl = image.path;
+    const imageUrl = image.path;
 
     const product = new Product({
         make: make, 
@@ -124,13 +122,12 @@ exports.postEditProduct = (req, res, next) => {
     const updatedMake = req.body.make;
     const updatedModel = req.body.model;
     const updatedYear = req.body.year;
-    const updatedImageUrl = req.body.imageUrl;
+    const updatedImageUrl = req.file;
     const updatedCategory = req.body.category;
     const updatedDescription = req.body.description;
     const updatedPrice = req.body.price;
 
     const errors = validationResult(req);
-
     if (!errors.isEmpty()) {
         return res.status(422).render('admin/edit-product', {
         pageTitle: 'Edit Product',
@@ -138,13 +135,12 @@ exports.postEditProduct = (req, res, next) => {
         editing: true,
         hasError: true,
         product: {
-            make: make, 
-            model: model,
-            year: year,
-            imageUrl: imageUrl,
-            category: category,
-            description: description,
-            price: price,
+            make: updatedMake, 
+            model: updatedModel,
+            year: updatedYear,
+            category: updatedCategory,
+            description: updatedDescription,
+            price: updatedPrice,
             userId: req.user
         },
         errorMessage: errors.array()[0].msg,
@@ -160,7 +156,10 @@ exports.postEditProduct = (req, res, next) => {
         product.make = updatedMake;
         product.model = updatedModel;
         product.year = updatedYear;
-        product.imageUrl = updatedImageUrl;
+        if (image) {
+            fileHelper.deleteFile(product.imageUrl);
+            product.imageUrl = image.path;
+          }
         product.category = updatedCategory;
         product.description = updatedDescription;
         product.price = updatedPrice;
@@ -171,6 +170,7 @@ exports.postEditProduct = (req, res, next) => {
     })
     .catch(err => {
         const error = new Error(err);
+        console.log(error);
         error.httpStatusCode = 500;
         return next(error);
     });
