@@ -65,7 +65,7 @@ exports.postAddProduct = (req, res, next) => {
         });
     }
     
-    const imageUrl = image.path;
+    //const imageUrl = image.path;
 
     const product = new Product({
         make: make, 

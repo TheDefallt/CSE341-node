@@ -37,6 +37,6 @@ router.get('/checkout/cancel', shopController.getCheckout);
 //Order page => GET
 router.get('/order', isAuth, shopController.getOrders);
 
-router.get('/orders/:orderId', isAuth, shopController.getInvoice);
+//router.get('/orders/:orderId', isAuth, shopController.getInvoice);
 
 module.exports = router;

@@ -60,17 +60,17 @@ exports.getProduct = (req, res, netxt) => {
 exports.getIndex = (req, res, next) => {
     const page = +req.query.page || 1;
     let totalItems;
-
+    
     Product.find()
     .countDocuments()
     .then(numProducts => {
         totalItems = numProducts;
         return Product.find()
-          .skip((page - 1) * ITEMS_PER_PAGE)
-          .limit(ITEMS_PER_PAGE);
+        .skip((page - 1) * ITEMS_PER_PAGE)
+        .limit(ITEMS_PER_PAGE);
     })
     .then(products => {
-
+        
         //Gathers all available categories to be filtered from the database.
         const categories = [];
         for (product of products) {
@@ -87,7 +87,7 @@ exports.getIndex = (req, res, next) => {
         } else {
             filteredProduct = products.filter(product => product.category === criteria); 
         }
-
+        
         //Renders the page
         res.render('shop/index', {
             pageTitle: 'Shop', 
