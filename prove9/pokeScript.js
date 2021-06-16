@@ -15,7 +15,7 @@ const currentB = document.getElementById("current");
 const nextB = document.getElementById("next");
 const lastB = document.getElementById("last");
 
-//Fetch a page by URL
+//Fetch a page by URL (Put this in a model?)
 const getPageByURL = url => {
     fetch(url)
     .then(response => response.json())
