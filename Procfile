@@ -1,1 +1,1 @@
-web: npm run zApp
+web: npm run prove9
