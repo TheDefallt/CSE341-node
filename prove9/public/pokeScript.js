@@ -15,8 +15,11 @@ const currentB = document.getElementById("current");
 const nextB = document.getElementById("next");
 const lastB = document.getElementById("last");
 
+console.log("pokeScript");
+
 //Fetch a page by URL (Put this in a model?)
 const getPageByURL = url => {
+    console.log("Making it here");
     fetch(url)
     .then(response => response.json())
     .then((responseData) => {
