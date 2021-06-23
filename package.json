@@ -13,6 +13,7 @@
     "prove02": "nodemon week2/prove02.js",
     "zApp": "nodemon zApp/app.js",
     "prove9": "nodemon prove9/app.js",
+    "prove10": "nodemon prove10/app.js",
     "notes": "nodemon Notes/app.js"
   },
   "dependencies": {
