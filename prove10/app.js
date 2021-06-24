@@ -19,8 +19,17 @@ app.use('/fetchAll', (req, res, next) => {
 });
 
 app.use('/insert', (req, res, next) => {
-    console.log(req.body.newHero);
-    dummyData.avengers.push({name: req.body.newHero});
+
+    dummyData.avengers.forEach(element => {
+        if(req.body.newHero !== undefined){
+            let newHero = req.body.newHero;
+
+            if(!dummyData.avengers.some(a => a.name === newHero)){
+                dummyData.avengers.push({name: req.body.newHero});
+                console.log("Avenger Added");
+            }
+        }
+    })
 });
 
 app.get('/', (req, res, next) => {

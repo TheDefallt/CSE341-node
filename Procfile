@@ -1,1 +1,1 @@
-web: npm run prove9
+web: npm run prove10
