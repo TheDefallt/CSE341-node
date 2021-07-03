@@ -1,8 +1,4 @@
-const socket = io('/');
 
-socket.on('update', () => {
-    fillList();
-});
 
 const fillList = () => {
     const nameList = document.getElementById('nameList')
@@ -35,8 +31,6 @@ const addToList = () => {
         document.getElementById('newName').value = ''
         console.error(err)
     })
-
-    socket.emit('newName');
 
     document.getElementById('newName').value = '';
 
