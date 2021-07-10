@@ -44,6 +44,6 @@ const login = () => {
 
     const data = postData('/login', {userName});
 
-    socket.emit('newUser', userName);
+    socket.emit('newUser', userName, new Date().toLocaleTimeString());
     window.location = '/chat';
 }
