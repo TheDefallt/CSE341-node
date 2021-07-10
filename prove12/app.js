@@ -39,15 +39,17 @@ io.on('connection', socket => {
             // A new user logs in.
             const message = `${username} has logged on.`
             socket.broadcast.emit('newMessage', {
-                /** CONTENT for the emit **/
-            }) // <-----TODO-----
+                message,
+                time,
+                from: 'admin'
+            })
         })
         .on('message', data => {
             // Receive a new message
             console.log('Message received')
             console.log(data)
             socket.broadcast.emit('newMessage', {
-                /** CONTENT for the emit **/
-            }) // <-----TODO----- Note, only emits to all OTHER clients, not sender.
+                ...data
+            }) //Note, only emits to all OTHER clients, not sender.
         })
 })

@@ -1,3 +1,5 @@
+// const session = require("express-session")
+
 const socket = io('/') // This means your client will always be connected to your server, locally or on Heroku.
 
 const errorContainer = document.getElementById('errMsg')
@@ -26,7 +28,22 @@ const postData = async (url = '', data = {}) => {
 
 // Login user to access chat room.
 const login = () => {
-    /***********************************
-     *         YOUR CODE HERE          *
-     ***********************************/
+    console.log('Login attempt');
+
+    //Get username from the page
+    const userName = usernameInput.value;
+    
+    //Blank out the error message
+    errorContainer.textContent = '';
+
+    //Make sure username is not empty
+    if(!userName){
+        errorContainer.innerHTML = 'Username cannot be blank.'
+        return
+    }
+
+    const data = postData('/login', {userName});
+
+    socket.emit('newUser', userName);
+    window.location = '/chat';
 }

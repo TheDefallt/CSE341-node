@@ -11,15 +11,25 @@ socket.on('newMessage', data => {
 
 // Post message to board
 const postMessage = () => {
-    /***********************************
-     *         YOUR CODE HERE          *
-     ***********************************/
+    const message = messageEl.value;
+    const from = user.value;
+    const time = new Date().toLocaleTimeString();
+
+    const data = {message, from, time};
+
+    socket.emit('message', data);
+
+    addMessage(data, true);
+
+    messageEl.value = '';
 }
 
 // Add message from any user to chatbox, determine if added
 // by current user.
 const addMessage = (data = {}, user = false) => {
-    /***********************************
-     *         YOUR CODE HERE          *
-     ***********************************/
+    chatBox.innerHTML += `
+        <li class="message${user ? ' uMessage' : ''}">
+            ${data.from} @${data.time}: ${data.message}
+        </li>
+    `;
 }
